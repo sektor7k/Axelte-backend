@@ -1,0 +1,57 @@
+# Rust build
+/target/
+
+# Rust package manager files
+**/*.rs.bk
+
+# Backup files
+*~
+*.swp
+*.swo
+*.bak
+
+# IntelliJ IDEA, CLion, etc.
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+.env
+
+# Logs
+*.log
+
+# Byebug
+.byebug_history
+
+# Coverage files
+/coverage/
+*.lcov
+
+# Binary/output
+*.exe
+*.dll
+*.so
+*.dylib
+*.out
+*.a
+*.o
+
+# Cargo specific
+Cargo.lock
+
+# Optional: Ignore build script output
+/build/
+
+# Optional: If you use `cargo-edit` and don’t want to track lock files
+# /Cargo.lock
+
+# Optional: If using wasm-pack
+/pkg/
