@@ -4,10 +4,12 @@ mod handlers;
 mod models;
 use std::env;
 mod middleware;
+mod state;
 
 use axum::{
     http::{header, HeaderValue, Method}, middleware::from_fn_with_state, routing::get, Extension, Router
 };
+use state::AppState;
 use tokio::net::TcpListener;
 use tower_cookies::CookieManagerLayer;
 use tower_http::cors::{ CorsLayer};
@@ -24,6 +26,8 @@ async fn main(){
     let client_url = env::var("CLIENT_URL").expect("CLIENT_URL must be set");
     
     let pool = db::init_db().await.unwrap();
+
+    let app_state = AppState::new(); 
 
     let cors = CorsLayer::new()
     .allow_origin(client_url.parse::<HeaderValue>().unwrap()) 
@@ -43,6 +47,7 @@ async fn main(){
     .nest("/api", body_routes(pool.clone()))
      .layer(CookieManagerLayer::new())
     .layer(Extension(pool.clone()))
+    .layer(Extension(app_state.clone()))
     .layer(cors);
 
 
