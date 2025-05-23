@@ -501,60 +501,7 @@ pub async fn update_page(
     Extension(user): Extension<User>,
     Json(payload): Json<UpdatePagePayload>,
 ) -> Result<impl IntoResponse, (StatusCode, Json<serde_json::Value>)> {
-    // // Önce sayfanın workspace_id'sini al
-    // let page = sqlx::query!(
-    //     "SELECT workspace_id FROM pages WHERE id = ?",
-    //     payload.id
-    // )
-    // .fetch_optional(&pool)
-    // .await
-    // .map_err(|_| {
-    //     (
-    //         StatusCode::INTERNAL_SERVER_ERROR,
-    //         Json(json!({ "message": "Database error"})),
-    //     )
-    // })?;
-
-    // let workspace_id = match page {
-    //     Some(p) => p.workspace_id,
-    //     None => return Err((
-    //         StatusCode::NOT_FOUND,
-    //         Json(json!({ "message": "Page not found"})),
-    //     )),
-    // };
-
-    // // Kullanıcının workspace'teki rolünü kontrol et
-    // let user_role = sqlx::query!(
-    //     "SELECT role FROM workspace_members WHERE workspace_id = ? AND user_id = ?",
-    //     workspace_id,
-    //     user.id
-    // )
-    // .fetch_optional(&pool)
-    // .await
-    // .map_err(|_| {
-    //     (
-    //         StatusCode::INTERNAL_SERVER_ERROR,
-    //         Json(json!({ "message": "Database error"})),
-    //     )
-    // })?;
-
-    // // Kullanıcı workspace'e üye değilse veya viewer rolündeyse hata döndür
-    // match user_role {
-    //     Some(role) if role.role == "viewer" => {
-    //         return Err((
-    //             StatusCode::FORBIDDEN,
-    //             Json(json!({ "message": "Viewers cannot update pages"})),
-    //         ));
-    //     }
-    //     None => {
-    //         return Err((
-    //             StatusCode::FORBIDDEN,
-    //             Json(json!({ "message": "You don't have access to this workspace"})),
-    //         ));
-    //     }
-    //     _ => {} // owner veya editor ise devam et
-    // }
-
+    
 
     let result = sqlx::query!(
         "UPDATE pages SET content = ? WHERE id = ?",

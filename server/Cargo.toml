@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+scraper_service_cli = { path = "../scraper_service_cli" }
 async-trait = "0.1.88"
 axum = "0.8.4"
 axum-extra = { version = "0.10.1", features = ["cookie"] }
@@ -17,6 +18,8 @@ sqlx = { version = "0.8.5", features = ["mysql", "macros", "runtime-tokio-rustls
 tokio = { version = "1.45.0", features = ["full"] }
 tower-cookies = "0.11.0"
 tower-http = { version = "0.6.4", features = ["cors"] }
-uuid = { version = "1.8.0", features = ["v4"] }
+uuid = { version = "1.8.0", features = ["v4", "serde"] }
+dashmap = "5.5.3"
+futures = "0.3"
 
 
